@@ -38,8 +38,6 @@ class Main extends React.Component {
                 showMap: true,
                 showError: false
                 
-
-
             })
 
             // console.log(myServerData.data.length)
@@ -58,6 +56,7 @@ class Main extends React.Component {
         }
 
         try{
+            let cityName = e.target.cityName.value
             let myServer = `${process.env.REACT_APP_SERVER_LINK}wheather?city=${cityName}`
             let myServerData = await axios.get(myServer);
 
