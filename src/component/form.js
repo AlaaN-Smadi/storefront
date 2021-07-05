@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class FormPage extends React.Component {
     render() {
         return (
-            <div style={{marginTop:"25px"}}>
+            <div style={{marginTop:"10px"}}>
                 
 
                 <Row md={1} className="g-4">

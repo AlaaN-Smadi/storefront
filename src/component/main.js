@@ -3,6 +3,7 @@ import FormPage from './form';
 import TablePage from './Table';
 import Map from './map';
 import axios from 'axios';
+import ShowError from './ShowError'
 
 class Main extends React.Component {
 
@@ -12,7 +13,8 @@ class Main extends React.Component {
             jsonData: {},
             cityName: '',
             zoom: 10,
-            showMap: false
+            showMap: false,
+            showError: false
         }
     }
 
@@ -20,25 +22,32 @@ class Main extends React.Component {
 
     submitBut = async (e) => {
         e.preventDefault();
+        try {
+            let cityName = e.target.cityName.value
 
-        let cityName = e.target.cityName.value
+            let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
+            let data = await axios.get(url);
 
-        let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
-        let data = await axios.get(url);
+            // console.log(data);
 
-        // console.log(data);
+            await this.setState({
+                jsonData: data.data[0],
+                cityName: data.data[0].display_name,
+                showMap: true,
+                showError: false
 
-        await this.setState({
-            jsonData: data.data[0],
-            cityName: data.data[0].display_name,
-            showMap: true
+            })
 
+            console.log(data.data[0])
+            console.log(this.state.jsonData)
+            // console.log(this.state.jsonData)
+        } catch {
+            await this.setState({
+                showError: true,
+                showMap: false
 
-        })
-
-        console.log(data.data[0])
-        console.log(this.state.jsonData)
-        // console.log(this.state.jsonData)
+            })
+        }
 
     }
 
@@ -54,6 +63,9 @@ class Main extends React.Component {
                 }
                 {this.state.showMap &&
                     <Map setZoom={this.setZoom} zoom={this.state.zoom} lon={this.state.jsonData.lon} lat={this.state.jsonData.lat} />
+                }
+                {this.state.showError &&
+                    <ShowError />
                 }
             </div>
         )
