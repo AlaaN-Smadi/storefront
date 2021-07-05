@@ -23,7 +23,7 @@ class Main extends React.Component {
 
         let cityName = e.target.cityName.value
 
-        let url = `https://us1.locationiq.com/v1/search.php?key=pk.d7056802aacd70f241c6719bb2bf361a&q=${cityName}&format=json`
+        let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
         let data = await axios.get(url);
 
         // console.log(data);
