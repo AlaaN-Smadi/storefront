@@ -3,7 +3,8 @@ import FormPage from './form';
 import TablePage from './Table';
 import Map from './map';
 import axios from 'axios';
-import ShowError from './ShowError'
+import ShowError from './ShowError';
+import WheatherTable from './wheather';
 
 class Main extends React.Component {
 
@@ -14,7 +15,9 @@ class Main extends React.Component {
             cityName: '',
             zoom: 10,
             showMap: false,
-            showError: false
+            showError: false,
+            wheather: {},
+            showWheather: false
         }
     }
 
@@ -28,22 +31,39 @@ class Main extends React.Component {
             let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
             let data = await axios.get(url);
 
-            // console.log(data);
+            let myServer = `${process.env.REACT_APP_SERVER_LINK}wheather?city=${cityName}`
+            let myServerData = await axios.get(myServer);
+            // console.log(myServerData.data[0].data);
+
 
             await this.setState({
                 jsonData: data.data[0],
                 cityName: data.data[0].display_name,
                 showMap: true,
-                showError: false
+                showError: false,
+                wheather: myServerData,
+
 
             })
 
-            console.log(data.data[0])
-            console.log(this.state.jsonData)
+            console.log(myServerData.data.length)
+
+            if (this.state.wheather.data.length !== 0) {
+                await this.setState({
+                    showWheather: true
+                })
+            } else {
+                await this.setState({
+                    showWheather: false
+                })
+            }
+            // console.log(this.state.wheather.data[0].data)
+            // console.log(this.state.jsonData)
             // console.log(this.state.jsonData)
         } catch {
             await this.setState({
                 showError: true,
+                showWheather:false,
                 showMap: false
 
             })
@@ -58,9 +78,15 @@ class Main extends React.Component {
             <div style={{ backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_Map_Blank.svg')", backgroundSize: "100%", backgroundRepeat: "no-repeat" }}>
                 <FormPage submitBut={this.submitBut} />
 
+
                 {this.state.showMap &&
-                    <TablePage cityInfo={this.state.jsonData} />
+                    <TablePage wheatherData={this.state.wheather} showWheather={this.state.showWheather} cityInfo={this.state.jsonData} />
                 }
+
+                {
+                (this.state.showWheather?<WheatherTable wheatherData={this.state.wheather} showWheather={this.state.showWheather} cityInfo={this.state.jsonData} />: null )
+                }
+
                 {this.state.showMap &&
                     <Map setZoom={this.setZoom} zoom={this.state.zoom} lon={this.state.jsonData.lon} lat={this.state.jsonData.lat} />
                 }

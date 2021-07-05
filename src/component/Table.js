@@ -28,23 +28,9 @@ class TablePage extends React.Component {
 
                         </tr>
 
-                        <tr style={{ color: "wheat" }}><th colSpan="2"> Wheather </th></tr>
+                        
 
-                        <tr style={{ color: "wheat" }}>
-                            <td> Date </td>
-                            <td> Description </td>
 
-                        </tr>
-                        <tr style={{ color: "wheat" }}>
-                            <td> Date </td>
-                            <td> Description </td>
-
-                        </tr>
-                        <tr style={{ color: "wheat" }}>
-                            <td> Date </td>
-                            <td> Description </td>
-
-                        </tr>
                     </tbody>
                 </Table>
             </div>
