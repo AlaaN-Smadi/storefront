@@ -31,22 +31,39 @@ class Main extends React.Component {
             let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
             let data = await axios.get(url);
 
-            let myServer = `${process.env.REACT_APP_SERVER_LINK}wheather?city=${cityName}`
-            let myServerData = await axios.get(myServer);
-            // console.log(myServerData.data[0].data);
-
-
+            
             await this.setState({
                 jsonData: data.data[0],
                 cityName: data.data[0].display_name,
                 showMap: true,
-                showError: false,
-                wheather: myServerData,
+                showError: false
+                
 
 
             })
 
-            console.log(myServerData.data.length)
+            // console.log(myServerData.data.length)
+
+            
+            // console.log(this.state.wheather.data[0].data)
+            // console.log(this.state.jsonData)
+            // console.log(this.state.jsonData)
+        } catch {
+            await this.setState({
+                showError: true,
+                showWheather:false,
+                showMap: false
+
+            })
+        }
+
+        try{
+            let myServer = `${process.env.REACT_APP_SERVER_LINK}wheather?city=${cityName}`
+            let myServerData = await axios.get(myServer);
+
+            await this.setState({
+                wheather: myServerData
+            })
 
             if (this.state.wheather.data.length !== 0) {
                 await this.setState({
@@ -57,15 +74,12 @@ class Main extends React.Component {
                     showWheather: false
                 })
             }
-            // console.log(this.state.wheather.data[0].data)
-            // console.log(this.state.jsonData)
-            // console.log(this.state.jsonData)
-        } catch {
-            await this.setState({
-                showError: true,
-                showWheather:false,
-                showMap: false
+            // console.log(myServerData.data[0].data);
 
+
+        }catch{
+            await this.setState({
+                showWheather: false
             })
         }
 
