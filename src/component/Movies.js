@@ -3,27 +3,28 @@ import Table from 'react-bootstrap/Table';
 
 
 class Movies extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             posterLink: 'https://image.tmdb.org/t/p/w500'
         }
     }
-    
-    
+
+
     render() {
         return (
             <div style={{ marginLeft: "25%", marginRight: "25%", textAlign: "center", backgroundColor: "#4b4ca3" }}>
                 <Table striped bordered hover>
-                    <thead style={{ color: "wheat",background:"#01011c" }}>
+                    <thead style={{ color: "wheat", background: "#01011c" }}>
                         <tr style={{ color: "wheat" }}><th colSpan="2"> City's Movies </th></tr>
                     </thead>
 
-                    <tbody>
-                        {this.props.moviesObject.map((item) => {
-                            return (
-                                <>
-                                    <tr style={{ color: "wheat",background:"darkblue" }}><th colSpan="2"> {item.title} </th></tr>
+
+                    {this.props.moviesObject.map((item, index) => {
+                        return (
+                            <>
+                                <tbody key={index}>
+                                    <tr style={{ color: "wheat", background: "darkblue" }}><th colSpan="2"> {item.title} </th></tr>
 
                                     <tr style={{ color: "wheat" }}>
                                         <td> Released  Date </td>
@@ -51,20 +52,21 @@ class Movies extends React.Component {
                                         <td> {item.overview} </td>
 
                                     </tr>
-                                    
+
                                     <tr style={{ color: "wheat" }}><th colSpan="2"> Movie  Poster </th></tr>
 
                                     <tr style={{ color: "wheat" }}><th colSpan="2"> <img alt='poster' src={`${this.state.posterLink + item.poster_path}`} /> </th></tr>
                                     {/* <tr style={{ color: "wheat" }}><th colSpan="2"> {this.state.posterLink + item.poster_path} </th></tr> */}
-                                </>
-                            )
-                        })
+                                </tbody>
+                            </>
+                        )
+                    })
 
-                        }
+                    }
 
 
 
-                    </tbody>
+
                 </Table>
             </div>
         )
