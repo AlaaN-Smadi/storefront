@@ -16,17 +16,15 @@ class WheatherTable extends React.Component {
 
                     <tbody>
                         {
-                            this.props.wheatherData.data.map((item) => {
-                                return (
 
-                                    <tr style={{ color: "wheat" }}>
-                                        <td> {item.datetime} </td>
-                                        <td> heigh of {item.high_temp}, and low of {item.low_temp} with {item.weather.description} </td>
 
-                                    </tr>
-                                )
-                            })}
+                            <tr style={{ color: "wheat" }}>
+                                <td> {this.props.wheatherData.data.datetime} </td>
+                                <td> heigh of {this.props.wheatherData.data.max_temp}, and low of {this.props.wheatherData.data.low_temp} with {this.props.wheatherData.data.weather.description} </td>
 
+                            </tr>
+
+                        }
 
 
 

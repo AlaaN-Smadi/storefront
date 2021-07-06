@@ -5,6 +5,8 @@ import Map from './map';
 import axios from 'axios';
 import ShowError from './ShowError';
 import WheatherTable from './wheather';
+import Movies from './Movies';
+
 
 class Main extends React.Component {
 
@@ -17,7 +19,9 @@ class Main extends React.Component {
             showMap: false,
             showError: false,
             wheather: {},
-            showWheather: false
+            showWheather: false,
+            showMovies: false,
+            movies: {}
         }
     }
 
@@ -42,6 +46,7 @@ class Main extends React.Component {
 
             // console.log(myServerData.data.length)
 
+            //  Weather
             try {
                 let cityName = this.state.jsonData.display_name.split(",")[0]
 
@@ -61,7 +66,7 @@ class Main extends React.Component {
                         showWheather: false
                     })
                 }
-                // console.log(myServerData.data[0].data);
+                // console.log(myServerData.data);
 
 
             } catch {
@@ -69,9 +74,31 @@ class Main extends React.Component {
                     showWheather: false
                 })
             }
+
+            //  Movies
+            try {
+                let cityName = this.state.jsonData.display_name.split(",")[0]
+                let myMovieServer = `${process.env.REACT_APP_SERVER_LINK}movies?city=${cityName}`
+
+                let moviesObject = await axios.get(myMovieServer)
+
+                // console.log(moviesObject.data)
+
+                await this.setState({
+                    showMovies: true,
+                    movies: moviesObject.data
+                })
+            } catch {
+                // console.log('Movies did not work')
+                await this.setState({
+                    showMovies: false
+                })
+            }
             // console.log(this.state.wheather.data[0].data)
             // console.log(this.state.jsonData)
             // console.log(this.state.jsonData)
+
+
         } catch {
             await this.setState({
                 showError: true,
@@ -104,6 +131,11 @@ class Main extends React.Component {
                 {this.state.showMap &&
                     <Map setZoom={this.setZoom} zoom={this.state.zoom} lon={this.state.jsonData.lon} lat={this.state.jsonData.lat} />
                 }
+
+                {this.state.showMovies &&
+                <Movies moviesObject={this.state.movies} />
+                }
+
                 {this.state.showError &&
                     <ShowError />
                 }
