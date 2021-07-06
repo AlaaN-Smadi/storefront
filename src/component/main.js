@@ -93,7 +93,7 @@ class Main extends React.Component {
 
 
                 {this.state.showMap &&
-                    <TablePage wheatherData={this.state.wheather} showWheather={this.state.showWheather} cityInfo={this.state.jsonData} />
+                    <TablePage cityInfo={this.state.jsonData} />
                 }
 
                 {

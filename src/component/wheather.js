@@ -16,7 +16,7 @@ class WheatherTable extends React.Component {
 
                     <tbody>
                         {
-                            this.props.wheatherData.data[0].data.map((item) => {
+                            this.props.wheatherData.data.map((item) => {
                                 return (
 
                                     <tr style={{ color: "wheat" }}>
