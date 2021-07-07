@@ -97,7 +97,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 
-Name of feature: lab_07
+Name of feature: lab_08
 
 Estimate of time needed to complete: 2 - 3 hours
 
