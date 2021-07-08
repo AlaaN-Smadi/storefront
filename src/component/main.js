@@ -52,6 +52,7 @@ class Main extends React.Component {
 
                 let myServer = `${process.env.REACT_APP_SERVER_LINK}wheather?city=${cityName}`
                 let myServerData = await axios.get(myServer);
+                // let inhancedWeatherData = myServerData.data[0]
 
                 await this.setState({
                     wheather: myServerData
@@ -66,7 +67,7 @@ class Main extends React.Component {
                         showWheather: false
                     })
                 }
-                // console.log(myServerData.data);
+                console.log(myServerData.data);
 
 
             } catch {
