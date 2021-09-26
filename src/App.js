@@ -1,21 +1,15 @@
 import React from 'react';
-import Main from './component/main';
-import Header from './component/header';
+import ToDo from './component/ToDo/ToDo';
+import SettingProvider from './context';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
-      <div style={{backgroundColor:"#e9e9f5"}} >
-        <Header />
-
-        <Main />
-
-        
-      </div>
-    )
+      <SettingProvider>
+        <ToDo />
+      </SettingProvider>
+    );
   }
 }
-
-export default App
