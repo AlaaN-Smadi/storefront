@@ -6,6 +6,7 @@ import "./list.css"
 export default function List(props) {
 
   const settingsContext = useContext(SettingsContext);
+  console.log(settingsContext)
   const [currentItems, setCurrentItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState(Math.ceil(props.list.length / settingsContext.perPage));
@@ -69,7 +70,10 @@ export default function List(props) {
         <Card key={item.id}>
 
           <Card.Body>
-            <Card.Title> {item.text} </Card.Title>
+            <Card.Title> {item.text}
+            <Button className="closeButton" variant="secondary" onClick={()=>props.deleteFunction(item.id)}> X </Button>
+            
+             </Card.Title>
             <Card.Text>
               Assigned to: {item.assignee}
             </Card.Text>
