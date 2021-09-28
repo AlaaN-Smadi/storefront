@@ -4,6 +4,8 @@ import List from '../list/list';
 import Form from '../forms/forms';
 import Headers from '../Header/header';
 import "./ToDo.css"
+import LoginProvider from '../context/context';
+import Auth from '../context/auth';
 
 const ToDo = () => {
 
@@ -42,12 +44,16 @@ const ToDo = () => {
     <>
       <Headers />
 
-      <div className="ToDoList">
-        <h1 className="Title">To Do List Manager  ({incomplete}) </h1>
-        <Form addItem={addItem} />
+      
+        <Auth capability="read">
+          <div className="ToDoList">
+            <h1 className="Title">To Do List Manager  ({incomplete}) </h1>
+            <Form addItem={addItem} />
 
-        <List list={list} toggleComplete={toggleComplete} deleteFunction={deleteItem} />
-      </div>
+            <List list={list} toggleComplete={toggleComplete} deleteFunction={deleteItem} />
+          </div>
+        </Auth>
+      
     </>
   );
 };

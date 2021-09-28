@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { SettingsContext } from '../../context';
 import { Card, Button } from 'react-bootstrap';
 import "./list.css"
+import Auth from '../context/auth';
 
 export default function List(props) {
 
@@ -71,16 +72,19 @@ export default function List(props) {
 
           <Card.Body>
             <Card.Title> {item.text}
-            <Button className="closeButton" variant="secondary" onClick={()=>props.deleteFunction(item.id)}> X </Button>
-            
-             </Card.Title>
+              <Auth capability="delete">
+                <Button className="closeButton" variant="secondary" onClick={() => props.deleteFunction(item.id)}> X </Button>
+              </Auth>
+            </Card.Title>
             <Card.Text>
               Assigned to: {item.assignee}
             </Card.Text>
             <Card.Text>
               Difficulty: {item.difficulty}
             </Card.Text>
-            <Button onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</Button>
+            <Auth capability="update">
+              <Button onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</Button>
+            </Auth>
           </Card.Body>
         </Card>
 
