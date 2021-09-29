@@ -8,7 +8,7 @@ export default function Headers(props) {
 
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">To Do  App</Navbar.Brand>
+                <Navbar.Brand href="#home"> 401-Phones Store </Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="#home"> 🏡 Home</Nav.Link>
                     

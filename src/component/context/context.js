@@ -17,6 +17,35 @@ export default function LoginProvider(props) {
         validateJwToken(tokenFromCookie);
     }, []);
 
+    const signUp = async (username, password, role) => {
+        // {username: password} encoded
+        //Basic base64(username:password)
+        try{
+           
+
+            let user = {
+                username: username,
+                password: password,
+                role: role
+            }
+    
+            const response = await superagent.post(`${API}/signup`, user);
+            
+            console.log(response);
+    
+            
+            login(username,password)
+            
+        }catch{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'UserName is aleady taken!'
+            })
+        }
+       
+    }
+
     const login = async (username, password) => {
         // {username: password} encoded
         //Basic base64(username:password)
@@ -75,7 +104,8 @@ export default function LoginProvider(props) {
         login,
         logout,
         user,
-        can
+        can,
+        signUp
     }
 
     return (

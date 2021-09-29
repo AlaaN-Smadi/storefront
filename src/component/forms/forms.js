@@ -11,25 +11,28 @@ export default function Form(props) {
   return (
     <Auth capability="create">
       <form className="myForm" onSubmit={handleSubmit}>
-        <h2>Add To Do Item</h2>
+        <h2>Add New Phone</h2>
         <FormGroup
-          label="To Do Item"
+          label="Phones"
           labelFor="text-input">
-          <InputGroup onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+          <InputGroup required onChange={handleChange} name="text" type="text" placeholder="Phone Type" />
         </FormGroup>
 
         <FormGroup
-          label="Assigned To"
+          label="Phone Descreption"
           labelFor="text-input">
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+          <input required onChange={handleChange} name="assignee" type="text" placeholder="Phone Descreption" />
         </FormGroup>
 
         <FormGroup
-          label="Difficulty"
-          labelFor="text-input">
-          <input onChange={handleChange} defaultValue={3} type="range" min={1} max={5} name="difficulty" />
+        label="Phone Image"
+        labelFor="text-input">
+        <input required onChange={handleChange} name="difficulty" type="text" placeholder="Phone Image" />
+          
+          
+          
         </FormGroup>
-        <Button type="submit">Add Item</Button>
+        <Button type="submit">Add Phone</Button>
       </form>
     </Auth>
   )
