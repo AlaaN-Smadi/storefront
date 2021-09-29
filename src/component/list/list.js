@@ -57,21 +57,24 @@ export default function List(props) {
 
       {
         settingsContext.showCompleted &&
-        <Button onClick={completed} > Hide Completed </Button>
+
+        <Button onClick={completed} > Hide Out Of Stock Phones </Button>
       }
 
       {
         !settingsContext.showCompleted &&
-        <Button onClick={completed} > View Completed </Button>
+        <Button onClick={completed} > View Out Of Stock Phones </Button>
       }
 
 
       {currentItems.map(item => (
 
-        <Card key={item.id}>
-
+        ///////////////////////////////////////////////
+        <Card className="phonesCard" key={item.id}>
+          <Card.Img variant="top" src={`${item.difficulty}`} />
           <Card.Body>
-            <Card.Title> {item.text}
+            <Card.Title>
+              {item.text}
               <Auth capability="delete">
                 <Button className="closeButton" variant="secondary" onClick={() => props.deleteFunction(item.id)}> X </Button>
               </Auth>
@@ -80,13 +83,34 @@ export default function List(props) {
               Assigned to: {item.assignee}
             </Card.Text>
             <Card.Text>
-              Difficulty: {item.difficulty}
+              {
+                !item.complete &&
+                <h2> {`State : Available`} </h2>
+              }
+              {
+                item.complete &&
+                <h2> {`State : Out Of Stock `} </h2>
+              }
             </Card.Text>
             <Auth capability="update">
-              <Button onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</Button>
+              {
+                !item.complete &&
+                <Button onClick={() => props.toggleComplete(item.id)}> Set it as Out Of Stock </Button>
+              }
+              {
+                item.complete &&
+                <Button onClick={() => props.toggleComplete(item.id)}> Set it as Available In Stock </Button>
+              }
+
             </Auth>
           </Card.Body>
+          <Card.Footer>
+            <small className="text-muted"> Less than an hour </small>
+          </Card.Footer>
         </Card>
+        ///////////////////////////////////
+
+
 
 
 
