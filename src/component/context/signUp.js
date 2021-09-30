@@ -27,8 +27,8 @@ export default function SignUp(props) {
                 <Form onSubmit={handleSubmit}>
                     <h3> Sign Up </h3>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control name="userName" type="text" placeholder="Enter email" />
+                        <Form.Label> Your Name </Form.Label>
+                        <Form.Control required name="userName" type="text" placeholder="Name" />
                         <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                         </Form.Text>
@@ -36,7 +36,7 @@ export default function SignUp(props) {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Password" />
+                        <Form.Control required name="password" type="password" placeholder="Password" />
                     </Form.Group>
                     
                     <Button variant="primary" type="submit">
