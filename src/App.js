@@ -1,29 +1,16 @@
-import React from 'react';
-import ToDo from './component/ToDo/ToDo';
-import SettingProvider from './context';
-
-import Auth from "./component/context/auth";
-import LoginProvider from "./component/context/context";
-import Login from "./component/context/login";
-
+import Header from './components/header';
+import Footer from './components/footer';
+import Product from './components/product';
+import Categories from './components/Categories'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class App extends React.Component {
-  render() {
+export default props=> {
     return (
-      <div>
-
-
-        <LoginProvider>
-          <SettingProvider>
-          
-            {/* user - editor - admin */}
-            
-              <ToDo />
-           
-          </SettingProvider>
-        </LoginProvider>
-      </div>
-    );
-  }
-}
+        <>
+            <Header/>
+            <Categories/>
+            <Product/>
+            <Footer/>
+        </>
+    )
+} ;
