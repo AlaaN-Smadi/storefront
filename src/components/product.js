@@ -1,23 +1,27 @@
 import React from 'react';
 import CardMedia from '@mui/material/CardMedia';
 import { connect } from 'react-redux';
-import { productActive } from '../store/products';
-import { inventory } from '../store/products';
 import {addToCart} from '../store/cart';
 import {Card, Button} from 'react-bootstrap'
+import {addProduct,inventoryAction} from '../action/action';
+
+
 function Products(props) {
+
   function handleClick(item){
     props.addToCart(item);
-    props.inventory(item);
+    props.addProduct(item);
+    props.inventoryAction(item)
   }
+  
   return (
     <div>
-      {props.products.activeProduct.map(element => {
+      {props.products.map(element => {
         return <Card style={{ marginLeft: '200px', marginTop: '50px', display: 'inline-block', width: '300px', border: '2px solid grey', marginBottom: '50px' }} sx={{ maxWidth: 345 }}>
         <Card.Body>
           <CardMedia
             component="img"
-            height="194"
+            height="150"
             image={element.image}
             alt="Paella dish"
           />
@@ -36,16 +40,16 @@ function Products(props) {
     </div>
   );
 }
+
+
 function mapStateToProps(state){
   return{
-    products:state.products,
+    products:state.products.activeProduct,
     category:state.categories.activeCategories,
-    cart: state.cart
   } 
 }
 const mapDispatchToProps = {
-  productActive,
-  inventory,
-  addToCart
+  addProduct,inventoryAction,addToCart
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

@@ -9,8 +9,8 @@ export default function Footer() {
       <Container>
 
         <Nav className="me-auto">
-          <Nav.Link href="#home">© 2021 Alaa Nasser Smadi</Nav.Link>
-          <Nav.Link href="#features">Lab 37</Nav.Link>
+          <Nav.Link href="#home"> © 2021 Alaa Nasser Smadi </Nav.Link>
+          <Nav.Link href="#features"> Lab 38 </Nav.Link>
           
         </Nav>
         
